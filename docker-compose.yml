@@ -9,4 +9,4 @@ services:
     container_name: aveda-tutor
     restart: unless-stopped
     ports:
-      - "${PORT:-3005}:80"
+      - "${PORT:-8093}:80"
