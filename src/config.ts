@@ -1,6 +1,12 @@
 const env = import.meta.env
 
+export const TUTOR_ASSISTANT_ID = 'ff263386-de80-4694-af39-1a271ca94da2'
+
 export const ASSISTANTS = {
+  tutor: {
+    id: TUTOR_ASSISTANT_ID,
+    label: 'Cinta Aveda · AI Exam Prep Tutor',
+  },
   cinta: {
     id: '7de674c1-6029-4609-92c4-074fab740bad',
     label: 'Cinta Aveda Institute (San Francisco / San Jose)',
@@ -13,5 +19,5 @@ export const ASSISTANTS = {
 
 export const config = {
   apiBaseUrl: (env.VITE_API_BASE_URL || 'https://api.zerde.co/diaxel').replace(/\/+$/, ''),
-  defaultAssistantId: env.VITE_ASSISTANT_ID || ASSISTANTS.cinta.id,
+  defaultAssistantId: env.VITE_ASSISTANT_ID || TUTOR_ASSISTANT_ID,
 } as const
