@@ -1,5 +1,5 @@
 import { type FormEvent, useEffect, useState } from 'react'
-import { ASSISTANTS, config } from './config'
+import { config } from './config'
 
 type TriggerResponse = {
   status?: string
@@ -15,7 +15,6 @@ export default function App() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [assistantId, setAssistantId] = useState<string>(config.defaultAssistantId)
-  const [showCampusSelect, setShowCampusSelect] = useState(true)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -27,20 +26,11 @@ export default function App() {
     const pName = params.get('name') || params.get('first_name') || ''
     const pEmail = params.get('email') || ''
     const pAssistant = params.get('assistant_id') || ''
-    const pOrg = (params.get('org') || params.get('organization') || '').toLowerCase()
 
     if (pPhone) setPhone(pPhone.trim())
     if (pName) setName(pName.trim())
     if (pEmail) setEmail(pEmail.trim())
-
-    if (pAssistant) {
-      setAssistantId(pAssistant.trim())
-      setShowCampusSelect(false)
-    } else if (pOrg === 'canada') {
-      setAssistantId(ASSISTANTS.canada.id)
-    } else if (pOrg === 'cinta') {
-      setAssistantId(ASSISTANTS.cinta.id)
-    }
+    if (pAssistant) setAssistantId(pAssistant.trim())
   }, [])
 
   const handleSubmit = async (e: FormEvent) => {
@@ -72,11 +62,6 @@ export default function App() {
       const data = (await response.json().catch(() => ({}))) as TriggerResponse
 
       if (!response.ok) {
-        if (response.status === 404 || data.code === 'contact_not_found') {
-          throw new Error(
-            'This phone number was not found in CampusLogin. Please make sure you enter the exact phone number registered with Admissions.'
-          )
-        }
         throw new Error(data.error || `Request failed with status ${response.status}`)
       }
 
@@ -93,7 +78,7 @@ export default function App() {
       <div className="card">
         <div className="badge">
           <span className="badge-dot" />
-          AI Exam Prep Tutor
+          Cinta Aveda · AI Exam Prep Tutor
         </div>
 
         {successData ? (
@@ -130,8 +115,8 @@ export default function App() {
           <>
             <h1 className="title">Start Exam Prep Tutoring</h1>
             <p className="subtitle">
-              Enter your registered phone number below to switch your SMS chat into AI Tutor Mode and
-              practice daily state board exam questions.
+              Enter your phone number below to start your AI Tutor SMS session and practice daily
+              state board exam questions.
             </p>
 
             <div className="programs-strip">
@@ -142,23 +127,6 @@ export default function App() {
             </div>
 
             <form className="form" onSubmit={(e) => void handleSubmit(e)}>
-              {showCampusSelect && (
-                <div className="field">
-                  <label className="label" htmlFor="campus">
-                    Campus
-                  </label>
-                  <select
-                    id="campus"
-                    className="select"
-                    value={assistantId}
-                    onChange={(e) => setAssistantId(e.target.value)}
-                  >
-                    <option value={ASSISTANTS.cinta.id}>{ASSISTANTS.cinta.label}</option>
-                    <option value={ASSISTANTS.canada.id}>{ASSISTANTS.canada.label}</option>
-                  </select>
-                </div>
-              )}
-
               <div className="field">
                 <label className="label" htmlFor="name">
                   First Name
@@ -186,9 +154,6 @@ export default function App() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
-                <span className="hint">
-                  Must match the phone number registered in CampusLogin.
-                </span>
               </div>
 
               <div className="field">
