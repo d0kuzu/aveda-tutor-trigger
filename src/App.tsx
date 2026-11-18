@@ -67,7 +67,7 @@ export default function App() {
 
       setSuccessData(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to start AI Tutor session.')
+      setError(err instanceof Error ? err.message : 'Failed to start Tutor session.')
     } finally {
       setIsSubmitting(false)
     }
@@ -78,7 +78,7 @@ export default function App() {
       <div className="card">
         <div className="badge">
           <span className="badge-dot" />
-          Cinta Aveda · AI Exam Prep Tutor
+          State Board Exam Prep Tutor
         </div>
 
         {successData ? (
@@ -115,8 +115,8 @@ export default function App() {
           <>
             <h1 className="title">Start Exam Prep Tutoring</h1>
             <p className="subtitle">
-              Enter your phone number below to start your AI Tutor SMS session and practice daily
-              state board exam questions.
+              Enter your phone number below to start your Exam Prep Tutor SMS session and practice
+              daily state board exam questions.
             </p>
 
             <div className="programs-strip">
@@ -173,7 +173,7 @@ export default function App() {
               {error && <div className="alert-error">{error}</div>}
 
               <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                {isSubmitting ? 'Starting Tutor Session...' : 'Start AI Tutoring via SMS'}
+                {isSubmitting ? 'Starting Tutor Session...' : 'Start Tutoring via SMS'}
               </button>
             </form>
           </>

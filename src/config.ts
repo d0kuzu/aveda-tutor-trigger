@@ -5,7 +5,7 @@ export const TUTOR_ASSISTANT_ID = 'ff263386-de80-4694-af39-1a271ca94da2'
 export const ASSISTANTS = {
   tutor: {
     id: TUTOR_ASSISTANT_ID,
-    label: 'Cinta Aveda · AI Exam Prep Tutor',
+    label: 'State Board Exam Prep Tutor',
   },
   cinta: {
     id: '7de674c1-6029-4609-92c4-074fab740bad',
