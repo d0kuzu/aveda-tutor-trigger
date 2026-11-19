@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_BASE_URL: ${VITE_API_BASE_URL:-https://api.zerde.co/diaxel}
-        VITE_ASSISTANT_ID: ${VITE_ASSISTANT_ID:-7de674c1-6029-4609-92c4-074fab740bad}
+        VITE_ASSISTANT_ID: ${VITE_ASSISTANT_ID:-ff263386-de80-4694-af39-1a271ca94da2}
     container_name: aveda-tutor
     restart: unless-stopped
     ports:
